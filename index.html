@@ -2,24 +2,25 @@
 <html>
     <head>
         <script>
-          // Initialize the agent on page load.
-          const fpPromise = import('https://fpjscdn.net/v3/b8TzBJBLpC9AgETpqMfU')
-            .then(FingerprintJS => FingerprintJS.load({
-              apiKey: "b8TzBJBLpC9AgETpqMfU",
-              region: "eu",
-              endpoint: "https://metrics.sisyphusconsulting.co.uk",
-              scriptUrlPattern: "https://metrics.sisyphusconsulting.co.uk/web/v<version>/<apiKey>/loader_v<loaderVersion>.js"
-            }))
+  // Initialize the agent on page load.
+  const fpPromise = import('https://metrics.sisyphusconsulting.co.uk/web/v3/b8TzBJBLpC9AgETpqMfU')
+    .then(FingerprintJS => FingerprintJS.load({
+      endpoint: [
+        "https://metrics.sisyphusconsulting.co.uk",
+        FingerprintJS.defaultEndpoint
+      ],
+      region: "eu"
+    }))
 
-          // Get the visitorId when you need it.
-          fpPromise
-            .then(fp => fp.get())
-            .then(result => {
-              const visitorId = result.visitorId
-              console.log(visitorId)
-            })
-            
-        </script>
+  // Get the visitorId when you need it.
+  fpPromise
+    .then(fp => fp.get())
+    .then(result => {
+      const visitorId = result.visitorId
+      console.log(visitorId)
+    })
+
+</script>
     </head>
     <body>
         "One must imagine Sisyphus happy".
